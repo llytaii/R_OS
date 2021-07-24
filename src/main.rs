@@ -7,15 +7,13 @@ mod vga_buffer;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    use core::fmt::Write;
-
-    vga_buffer::WRITER.lock().write_str("Hello again");
-    write!(vga_buffer::WRITER.lock(), ", some numbers: {} {}", 42, 1.337);
-
+    println!("Hello World{}", "!!!");
+    panic!("Some panic message");
     loop {}
 }
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
+    println!("{}", _info);
     loop {}
 }
